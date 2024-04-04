@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <PackageReference Include="BigO.Core" Version="2.0.4.2" />
-    <PackageReference Include="BigO.DependencyInjection" Version="2.0.0" />
+    <PackageReference Include="BigO.DependencyInjection" Version="2.0.1" />
   </ItemGroup>
 
 	<ItemGroup>
