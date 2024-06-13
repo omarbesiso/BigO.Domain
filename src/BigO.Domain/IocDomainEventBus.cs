@@ -7,22 +7,22 @@ namespace BigO.Domain;
 ///     A default implementation of the <see cref="IDomainEventBus" /> using IOC to deliver published events to the
 ///     relevant handlers.
 /// </summary>
+/// <param name="serviceProvider">The service provider to resolve event handlers.</param>
 [PublicAPI]
-internal class IocDomainEventBus : IDomainEventBus
+internal class IocDomainEventBus(IServiceProvider serviceProvider) : IDomainEventBus
 {
-    private readonly IServiceProvider _serviceProvider;
-
-    public IocDomainEventBus(IServiceProvider serviceProvider)
-    {
-        _serviceProvider = serviceProvider;
-    }
-
+    /// <summary>
+    /// Publishes the specified domain event to all registered event handlers.
+    /// </summary>
+    /// <typeparam name="TDomainEvent">The type of the domain event.</typeparam>
+    /// <param name="event">The domain event to publish.</param>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when no handlers are found for the event type.</exception>
     public async Task Publish<TDomainEvent>(TDomainEvent @event) where TDomainEvent : class
     {
-        var services = _serviceProvider.GetServices(typeof(IDomainEventHandler<TDomainEvent>))
+        var services = serviceProvider.GetServices(typeof(IDomainEventHandler<TDomainEvent>))
             .Cast<IDomainEventHandler<TDomainEvent>>().ToList();
 
-        if (!services.Any())
+        if (services.Count == 0)
         {
             var eventType = typeof(TDomainEvent).FullName;
             throw new ArgumentOutOfRangeException(eventType,
