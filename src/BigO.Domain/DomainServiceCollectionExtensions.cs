@@ -1,5 +1,6 @@
 ﻿// ReSharper disable UnusedMember.Global
 
+using BigO.Core.Validation;
 using BigO.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,17 +28,13 @@ public static class DomainServiceCollectionExtensions
     /// </param>
     /// <returns>The <paramref name="serviceCollection" /> to which the service was added.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="serviceCollection" /> is <c>null</c>.</exception>
-    /// <remarks>
-    ///     This method registers the specified <typeparamref name="TDomainEventHandler" /> implementation as a service for the
-    ///     <typeparamref name="TDomainEvent" /> with the specified <paramref name="serviceLifetime" />.
-    ///     If <paramref name="serviceLifetime" /> is not provided, it defaults to <see cref="ServiceLifetime.Transient" />.
-    ///     If <paramref name="serviceCollection" /> is <c>null</c>, an exception will be thrown.
-    /// </remarks>
     public static IServiceCollection RegisterDomainEventHandler<TDomainEvent, TDomainEventHandler>(
         this IServiceCollection serviceCollection, ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
-        where TDomainEvent : class
+        where TDomainEvent : IDomainEvent
         where TDomainEventHandler : class, IDomainEventHandler<TDomainEvent>
     {
+        Guard.NotNull(serviceCollection);
+
         return serviceLifetime switch
         {
             ServiceLifetime.Singleton => serviceCollection
@@ -59,16 +56,11 @@ public static class DomainServiceCollectionExtensions
     /// </param>
     /// <returns>The <paramref name="serviceCollection" /> to which the service was added.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="serviceCollection" /> is <c>null</c>.</exception>
-    /// <remarks>
-    ///     This method registers the <see cref="IocDomainEventBus" /> as the default implementation of
-    ///     <see cref="IDomainEventBus" />
-    ///     with the specified <paramref name="serviceLifetime" />.
-    ///     If <paramref name="serviceLifetime" /> is not provided, it defaults to <see cref="ServiceLifetime.Singleton" />.
-    ///     If <paramref name="serviceCollection" /> is <c>null</c>, an exception will be thrown.
-    /// </remarks>
     public static IServiceCollection RegisterDefaultDomainEventBus(this IServiceCollection serviceCollection,
         ServiceLifetime serviceLifetime = ServiceLifetime.Singleton)
     {
+        Guard.NotNull(serviceCollection);
+
         return serviceLifetime switch
         {
             ServiceLifetime.Singleton => serviceCollection.AddSingleton<IDomainEventBus, IocDomainEventBus>(),
@@ -92,31 +84,23 @@ public static class DomainServiceCollectionExtensions
     ///     <see cref="ServiceLifetime.Scoped" />.
     /// </param>
     /// <returns>The <paramref name="serviceCollection" /> to which the service was added.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">
-    ///     <paramref name="serviceLifetime" /> is not a valid
-    ///     <see cref="ServiceLifetime" /> value.
-    /// </exception>
-    /// <remarks>
-    ///     This method scans the assembly of <typeparamref name="TModule" /> for classes that implement the
-    ///     <see cref="IDomainEventHandler{T}" /> interface
-    ///     and registers them as services with the specified <paramref name="serviceLifetime" />.
-    ///     If <paramref name="serviceLifetime" /> is not provided, it defaults to <see cref="ServiceLifetime.Scoped" />.
-    ///     If <paramref name="serviceCollection" /> or <paramref name="serviceLifetime" /> are <c>null</c>, an exception will
-    ///     be thrown.
-    /// </remarks>
+    /// <exception cref="ArgumentNullException"><paramref name="serviceCollection" /> is <c>null</c>.</exception>
     public static IServiceCollection RegisterModuleDomainEventHandlers<TModule>(
         this IServiceCollection serviceCollection,
         ServiceLifetime serviceLifetime = ServiceLifetime.Scoped) where TModule : IModule
     {
+        Guard.NotNull(serviceCollection);
+
         var type = typeof(IDomainEventHandler<>);
         RegisterInternal<TModule>(serviceCollection, serviceLifetime, type);
         return serviceCollection;
     }
 
     private static void RegisterInternal<TModule>(IServiceCollection serviceCollection, ServiceLifetime serviceLifetime,
-        Type type)
-        where TModule : IModule
+        Type type) where TModule : IModule
     {
+        Guard.NotNull(serviceCollection);
+
         switch (serviceLifetime)
         {
             case ServiceLifetime.Scoped:
@@ -141,7 +125,8 @@ public static class DomainServiceCollectionExtensions
                         .WithSingletonLifetime());
                 break;
             default:
-                throw new ArgumentOutOfRangeException(nameof(serviceLifetime), serviceLifetime, null);
+                throw new ArgumentOutOfRangeException(nameof(serviceLifetime), serviceLifetime,
+                    "Invalid service lifetime");
         }
     }
 }

@@ -10,4 +10,4 @@
 ///     2. The interface is merely introduced to help with dependency injection scenarios and as an output for the unit of
 ///     work pattern.
 /// </remarks>
-public interface IRepository{}
+public interface IRepository;

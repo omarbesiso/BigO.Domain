@@ -18,5 +18,5 @@ public interface IDomainEventBus
     /// <typeparam name="TDomainEvent">The type of the domain event.</typeparam>
     /// <param name="event">The domain event.</param>
     Task Publish<TDomainEvent>(TDomainEvent @event)
-        where TDomainEvent : class;
+        where TDomainEvent : IDomainEvent;
 }

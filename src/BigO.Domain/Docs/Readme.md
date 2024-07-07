@@ -1,4 +1,4 @@
-
+﻿
 # BigO.Domain
 
 [![NuGet version](https://badge.fury.io/nu/BigO.Domain.svg)](https://badge.fury.io/nu/BigO.Domain)
