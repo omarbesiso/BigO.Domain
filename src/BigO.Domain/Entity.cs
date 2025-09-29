@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace BigO.Domain;
+﻿namespace BigO.Domain;
 
 /// <summary>
 ///     A base entity implementation that provides an equality mechanism by comparing unique identifiers and
@@ -11,7 +9,6 @@ namespace BigO.Domain;
 ///     Initializes a new instance of the <see cref="Entity{TId}" /> class.
 /// </remarks>
 /// <param name="id">The unique identifier for the entity.</param>
-[PublicAPI]
 public abstract class Entity<TId>(TId id) : ObjectWithPropertyInterception, IEntity<TId>, IEquatable<Entity<TId>>
     where TId : struct
 {
@@ -46,10 +43,7 @@ public abstract class Entity<TId>(TId id) : ObjectWithPropertyInterception, IEnt
     ///     <see langword="true" /> if the current entity is equal to the <paramref name="other" /> parameter; otherwise,
     ///     <see langword="false" />.
     /// </returns>
-    public bool Equals(Entity<TId>? other)
-    {
-        return Equals(other as IEntity<TId>);
-    }
+    public bool Equals(Entity<TId>? other) => Equals(other as IEntity<TId>);
 
     /// <summary>
     ///     Determines whether the specified <see cref="object" /> is equal to this entity.
@@ -75,8 +69,5 @@ public abstract class Entity<TId>(TId id) : ObjectWithPropertyInterception, IEnt
     ///     Returns a hash code for this entity.
     /// </summary>
     /// <returns>A hash code for this entity, suitable for use in hashing algorithms and data structures like a hash table.</returns>
-    public override int GetHashCode()
-    {
-        return Id.GetHashCode();
-    }
+    public override int GetHashCode() => Id.GetHashCode();
 }

@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace BigO.Domain;
+﻿namespace BigO.Domain;
 
 /// <summary>
 ///     Contract for defining an entity.
@@ -15,7 +13,6 @@ namespace BigO.Domain;
 ///     implementations.
 /// </remarks>
 /// <typeparam name="TId">The type of the unique identifier.</typeparam>
-[PublicAPI]
 public interface IEntity<TId> : IEquatable<IEntity<TId>>
     where TId : struct
 {

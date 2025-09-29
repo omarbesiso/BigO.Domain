@@ -1,12 +1,9 @@
-﻿using JetBrains.Annotations;
-
-namespace BigO.Domain;
+﻿namespace BigO.Domain;
 
 /// <summary>
 ///     Interface defining a unit of work implementation, which maintains a list of objects affected by a business
 ///     transaction and coordinates the writing out of changes and the resolution of concurrency problems.
 /// </summary>
-[PublicAPI]
 public interface IUnitOfWork
 {
     /// <summary>

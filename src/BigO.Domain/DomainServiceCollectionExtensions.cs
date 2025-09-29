@@ -1,7 +1,5 @@
-﻿// ReSharper disable UnusedMember.Global
-
-using BigO.Core.Validation;
-using BigO.DependencyInjection;
+﻿using BigO.DependencyInjection;
+using BigO.Validation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BigO.Domain;

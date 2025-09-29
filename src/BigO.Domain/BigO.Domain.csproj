@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+		<TargetFrameworks>net9.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
@@ -10,7 +10,7 @@
 		<Title>BigO Domain Driven Design Helpers Library</Title>
 		<Product>BigO Library</Product>
 		<Description>A toolset of selected extensions and utilities to assist with learning/development tasks revolving around domain driven design.</Description>
-		<Copyright>Copyright © Omar Besiso 2022</Copyright>
+		<Copyright>Copyright © Omar Besiso 2022-2025</Copyright>
 		<PackageProjectUrl>https://github.com/omarbesiso/BigO.Domain</PackageProjectUrl>
 		<PackageIcon>bigo.png</PackageIcon>
 		<RepositoryType>git</RepositoryType>
@@ -18,13 +18,13 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<Authors>Omar Besiso</Authors>
-		<Version>2.4</Version>
+		<Version>9.0.0</Version>
 		<PackageReadmeFile>Readme.md</PackageReadmeFile>
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BigO.Core" Version="2.4" />
-    <PackageReference Include="BigO.DependencyInjection" Version="2.4" />
+    <PackageReference Include="BigO.DependencyInjection" Version="9.0.1" />
+    <PackageReference Include="BigO.Validation" Version="9.0.1" />
   </ItemGroup>
 
 	<ItemGroup>

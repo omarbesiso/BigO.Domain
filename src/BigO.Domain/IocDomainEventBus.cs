@@ -1,5 +1,4 @@
-﻿using JetBrains.Annotations;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace BigO.Domain;
 
@@ -11,7 +10,6 @@ namespace BigO.Domain;
 ///     Initializes a new instance of the <see cref="IocDomainEventBus" /> class.
 /// </remarks>
 /// <param name="serviceProvider">The service provider to resolve event handlers.</param>
-[PublicAPI]
 internal class IocDomainEventBus(IServiceProvider serviceProvider) : IDomainEventBus
 {
     /// <summary>

@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace BigO.Domain;
+﻿namespace BigO.Domain;
 
 /// <summary>
 ///     Defines the contract for a domain event handler as defined in Domain Driven Design.
@@ -13,7 +11,6 @@ namespace BigO.Domain;
 ///     state. Multiple handlers can exist for the same event.
 /// </remarks>
 /// <typeparam name="TDomainEvent">The type of the domain event.</typeparam>
-[PublicAPI]
 public interface IDomainEventHandler<in TDomainEvent> where TDomainEvent : IDomainEvent
 {
     /// <summary>

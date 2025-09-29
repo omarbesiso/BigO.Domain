@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace BigO.Domain;
+﻿namespace BigO.Domain;
 
 /// <summary>
 ///     Defines a generic event bus for sending domain events.
@@ -9,7 +7,6 @@ namespace BigO.Domain;
 ///     The default implementation delivers domain events to registered domain event handlers. There could be
 ///     multiple domain event handlers for the same domain event.
 /// </remarks>
-[PublicAPI]
 public interface IDomainEventBus
 {
     /// <summary>

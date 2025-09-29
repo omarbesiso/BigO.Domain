@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 
 namespace BigO.Domain;
 
@@ -8,7 +7,6 @@ namespace BigO.Domain;
 ///     property
 ///     changes, allowing for custom logic such as tracking, validation, or other operations when properties are set.
 /// </summary>
-[PublicAPI]
 public abstract class ObjectWithPropertyInterception
 {
     /// <summary>
