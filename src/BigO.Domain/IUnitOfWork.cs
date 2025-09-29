@@ -7,13 +7,6 @@
 public interface IUnitOfWork
 {
     /// <summary>
-    ///     Returns the repository implementation of the specified type.
-    /// </summary>
-    /// <typeparam name="TRepository">The type of the repository. Must implement <see cref="IRepository" />.</typeparam>
-    /// <returns>An instance of the specified repository type.</returns>
-    TRepository Repository<TRepository>() where TRepository : class, IRepository;
-
-    /// <summary>
     ///     Commits the changes that occurred within the scope of the unit of work.
     /// </summary>
     /// <remarks>
