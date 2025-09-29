@@ -10,14 +10,13 @@ namespace BigO.Domain;
 /// <remarks>
 ///     Initializes a new instance of the <see cref="Entity{TId}" /> class.
 /// </remarks>
-/// <param name="id">The unique identifier for the entity.</param>
-public abstract class Entity<TId>(TId id) : ObservableObject, IEntity<TId>, IEquatable<Entity<TId>>
+public abstract class Entity<TId> : ObservableObject, IEntity<TId>, IEquatable<Entity<TId>>
     where TId : struct
 {
     /// <summary>
     ///     Gets the unique identifier of the entity.
     /// </summary>
-    public TId Id { get; } = id;
+    public TId Id { get; protected set; }
 
     /// <summary>
     ///     Indicates whether the current entity is equal to another entity of the same type.
@@ -71,5 +70,6 @@ public abstract class Entity<TId>(TId id) : ObservableObject, IEntity<TId>, IEqu
     ///     Returns a hash code for this entity.
     /// </summary>
     /// <returns>A hash code for this entity, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+    // ReSharper disable once NonReadonlyMemberInGetHashCode
     public override int GetHashCode() => Id.GetHashCode();
 }
