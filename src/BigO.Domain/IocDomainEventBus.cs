@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using BigO.Validation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BigO.Domain;
 
@@ -17,9 +18,13 @@ internal class IocDomainEventBus(IServiceProvider serviceProvider) : IDomainEven
     /// </summary>
     /// <typeparam name="TDomainEvent">The type of the domain event.</typeparam>
     /// <param name="domainEvent">The domain event to publish.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when no handlers are found for the event type.</exception>
-    public async Task Publish<TDomainEvent>(TDomainEvent domainEvent) where TDomainEvent : IDomainEvent
+    public async Task Publish<TDomainEvent>(TDomainEvent domainEvent, CancellationToken cancellationToken = default)
+        where TDomainEvent : IDomainEvent
     {
+        Guard.NotNull(domainEvent);
+
         var handlers = serviceProvider.GetServices<IDomainEventHandler<TDomainEvent>>().ToList();
 
         if (handlers.Count == 0)
@@ -31,7 +36,7 @@ internal class IocDomainEventBus(IServiceProvider serviceProvider) : IDomainEven
 
         foreach (var handler in handlers)
         {
-            await handler.Handle(domainEvent);
+            await handler.Handle(domainEvent, cancellationToken);
         }
     }
 }

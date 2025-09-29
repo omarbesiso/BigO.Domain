@@ -1,4 +1,6 @@
-﻿namespace BigO.Domain;
+﻿using BigO.Types;
+
+namespace BigO.Domain;
 
 /// <summary>
 ///     A base entity implementation that provides an equality mechanism by comparing unique identifiers and
@@ -9,7 +11,7 @@
 ///     Initializes a new instance of the <see cref="Entity{TId}" /> class.
 /// </remarks>
 /// <param name="id">The unique identifier for the entity.</param>
-public abstract class Entity<TId>(TId id) : ObjectWithPropertyInterception, IEntity<TId>, IEquatable<Entity<TId>>
+public abstract class Entity<TId>(TId id) : ObservableObject, IEntity<TId>, IEquatable<Entity<TId>>
     where TId : struct
 {
     /// <summary>

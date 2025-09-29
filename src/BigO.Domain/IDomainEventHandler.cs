@@ -16,5 +16,7 @@ public interface IDomainEventHandler<in TDomainEvent> where TDomainEvent : IDoma
     /// <summary>
     ///     Handles the specified domain event published through the <see cref="IDomainEventBus" /> or another mechanism.
     /// </summary>
-    Task Handle(TDomainEvent @event);
+    /// <param name="event">The domain event to handle.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    Task Handle(TDomainEvent @event, CancellationToken cancellationToken = default);
 }
