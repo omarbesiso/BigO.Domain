@@ -18,12 +18,12 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<Authors>Omar Besiso</Authors>
-		<Version>9.0.2</Version>
+		<Version>9.0.3</Version>
 		<PackageReadmeFile>Readme.md</PackageReadmeFile>
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BigO.DependencyInjection" Version="9.0.1" />
+    <PackageReference Include="BigO.DependencyInjection" Version="9.0.2" />
     <PackageReference Include="BigO.Types" Version="9.0.1" />
     <PackageReference Include="BigO.Validation" Version="9.0.1" />
   </ItemGroup>
